@@ -1,20 +1,14 @@
-import { Card, CardBody,Center, Heading, HStack, Image, Text,Box, Spinner  } from '@chakra-ui/react'
-import { Game } from '../hooks/useGames'
-import PlatformIconList from './PlatformIconList'
-import CriticScore from './CriticScore'
+import { Card, CardBody, Center, Heading, HStack, Image, Text, Box, Spinner, useStyleConfig } from '@chakra-ui/react';
+import { Game } from '../hooks/useGames';
+import PlatformIconList from './PlatformIconList';
 import getCroppedImageUrl from '../services/image-url';
-// import getCroppedImageUrl from '../services/image-url'
-// import CriticScore from './CriticScore'
-//import Emoji from './Emoji'
-// import PlatformIconList from './PlatformIconList'
 
 interface Props {
-  game: Game ;
-
+  game: Game;
 }
 
-const GameCard = ({ game  }: Props) => {
-      const renderRatingStars = (rating: number) => {
+const GameCard = ({ game }: Props) => {
+  const renderRatingStars = (rating: number) => {
     const roundedRating = Math.round(rating);
     const filledStars = '★'.repeat(roundedRating);
     const emptyStars = '☆'.repeat(5 - roundedRating);
@@ -32,17 +26,17 @@ const GameCard = ({ game  }: Props) => {
   };
 
   const metacriticColor = getMetacriticColor(game.metacritic);
+  const cardStyles = useStyleConfig('Card', { variant: 'hover' }); // Custom variant for hover effect
 
- 
   return (
-   <Card
-      borderRadius={10}
-      overflow="hidden"
-      boxShadow="md"
-      transition="box-shadow 0.2s ease-in-out"
-      _hover={{ boxShadow: "lg" }}
+    <Card
+      key={game.id}
+            _hover={{ transform: "scale(1.05)" }}
+            transition="transform 0.2s ease-in-out"
+            cursor="pointer"
     >
-<Image src={getCroppedImageUrl(game.background_image)} />      <CardBody textAlign="center">
+      <Image src={getCroppedImageUrl(game.background_image)} />
+      <CardBody textAlign="center">
         <Heading
           fontSize="1xl"
           fontWeight="bold"
@@ -54,31 +48,17 @@ const GameCard = ({ game  }: Props) => {
         >
           {game.name}
         </Heading>
-                <Center>
+        <Center>
           <Text color="gray.500" fontSize="lg" mt={2}>
             <span style={{ color: 'yellow' }}>{renderRatingStars(game.rating)}</span>
           </Text>
         </Center>
-        {/* <HStack
-          position="absolute"
-          bottom="5px"
-          left="5px"
-          color={metacriticColor} // Apply the color scheme dynamically
-                    backgroundColor={metacriticColor === 'green' ? 'green.500' : metacriticColor === 'yellow' ? 'yellow.500' : ''}
-
-          fontSize='14px' 
-          paddingX={2} 
-          borderRadius='4px'
-        >
-          {game.metacritic} 
-        </HStack> */}
-      
-   <Center>
-          <PlatformIconList platforms={game.parent_platforms?.map(p => p.platform)} />
-        </Center>  
-        </CardBody>
+        <Center>
+          <PlatformIconList platforms={game.parent_platforms?.map((p) => p.platform)} />
+        </Center>
+      </CardBody>
     </Card>
-  )
-}
+  );
+};
 
-export default GameCard
+export default GameCard;
