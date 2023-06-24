@@ -75,7 +75,8 @@ const GameCard = ({ game  }: Props) => {
       
    <Center>
           <PlatformIconList platforms={game.parent_platforms?.map(p => p.platform)} />
-        </Center>  </CardBody>
+        </Center>  
+        </CardBody>
     </Card>
   )
 }
