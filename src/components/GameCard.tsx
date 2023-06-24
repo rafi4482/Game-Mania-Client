@@ -1,17 +1,19 @@
-import { Card, CardBody,Center, Heading, HStack, Image, Text,Box  } from '@chakra-ui/react'
+import { Card, CardBody,Center, Heading, HStack, Image, Text,Box, Spinner  } from '@chakra-ui/react'
 import { Game } from '../hooks/useGames'
 import PlatformIconList from './PlatformIconList'
 import CriticScore from './CriticScore'
+import getCroppedImageUrl from '../services/image-url';
 // import getCroppedImageUrl from '../services/image-url'
 // import CriticScore from './CriticScore'
 //import Emoji from './Emoji'
 // import PlatformIconList from './PlatformIconList'
 
 interface Props {
-  game: Game
+  game: Game ;
+
 }
 
-const GameCard = ({ game }: Props) => {
+const GameCard = ({ game  }: Props) => {
       const renderRatingStars = (rating: number) => {
     const roundedRating = Math.round(rating);
     const filledStars = '★'.repeat(roundedRating);
@@ -31,6 +33,7 @@ const GameCard = ({ game }: Props) => {
 
   const metacriticColor = getMetacriticColor(game.metacritic);
 
+ 
   return (
    <Card
       borderRadius={10}
@@ -39,8 +42,7 @@ const GameCard = ({ game }: Props) => {
       transition="box-shadow 0.2s ease-in-out"
       _hover={{ boxShadow: "lg" }}
     >
-      <Image src={game.background_image} h="200px" objectFit="cover" />
-      <CardBody textAlign="center">
+<Image src={getCroppedImageUrl(game.background_image)} />      <CardBody textAlign="center">
         <Heading
           fontSize="1xl"
           fontWeight="bold"
