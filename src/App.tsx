@@ -10,8 +10,10 @@ import PlatformIconList from "./components/PlatformIconList";
 
 
 function App() {
+const [selectedGenre,setSelectedGenre] = useState<Genre | null>(null)
+ 
 
-  return (
+return (
     <Grid
       templateAreas={{
         base: `"nav" "main"`,
@@ -27,11 +29,11 @@ function App() {
       </GridItem>
       <Show above="lg">
         <GridItem area="aside" paddingX={5}>
-          <GenreList  />
+          <GenreList onSelectGenre={(genre)=>setSelectedGenre(genre)}/>
         </GridItem>
       </Show>
       <GridItem area="main" >
-        <GameGrid />
+        <GameGrid selectedGenre={selectedGenre}/>
       </GridItem>
     </Grid>
   );
