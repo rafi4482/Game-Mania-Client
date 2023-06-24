@@ -1,6 +1,7 @@
-import { Card, CardBody,Center, Heading, HStack, Image, Text } from '@chakra-ui/react'
+import { Card, CardBody,Center, Heading, HStack, Image, Text,Box  } from '@chakra-ui/react'
 import { Game } from '../hooks/useGames'
 import PlatformIconList from './PlatformIconList'
+import CriticScore from './CriticScore'
 // import getCroppedImageUrl from '../services/image-url'
 // import CriticScore from './CriticScore'
 //import Emoji from './Emoji'
@@ -11,6 +12,25 @@ interface Props {
 }
 
 const GameCard = ({ game }: Props) => {
+      const renderRatingStars = (rating: number) => {
+    const roundedRating = Math.round(rating);
+    const filledStars = '★'.repeat(roundedRating);
+    const emptyStars = '☆'.repeat(5 - roundedRating);
+    return filledStars + emptyStars;
+  };
+
+  const getMetacriticColor = (metacritic: number) => {
+    if (metacritic > 75) {
+      return 'green';
+    } else if (metacritic > 60) {
+      return 'yellow';
+    } else {
+      return '';
+    }
+  };
+
+  const metacriticColor = getMetacriticColor(game.metacritic);
+
   return (
    <Card
       borderRadius={10}
@@ -32,6 +52,25 @@ const GameCard = ({ game }: Props) => {
         >
           {game.name}
         </Heading>
+                <Center>
+          <Text color="gray.500" fontSize="lg" mt={2}>
+            <span style={{ color: 'yellow' }}>{renderRatingStars(game.rating)}</span>
+          </Text>
+        </Center>
+        {/* <HStack
+          position="absolute"
+          bottom="5px"
+          left="5px"
+          color={metacriticColor} // Apply the color scheme dynamically
+                    backgroundColor={metacriticColor === 'green' ? 'green.500' : metacriticColor === 'yellow' ? 'yellow.500' : ''}
+
+          fontSize='14px' 
+          paddingX={2} 
+          borderRadius='4px'
+        >
+          {game.metacritic} 
+        </HStack> */}
+      
    <Center>
           <PlatformIconList platforms={game.parent_platforms?.map(p => p.platform)} />
         </Center>  </CardBody>
