@@ -7,15 +7,15 @@ import GameCardContainer from "./GameCardContainer";
 import { Genre } from "../hooks/useGenres";
 
 const GameGrid = () => {
-  const { games, error } = useGames();
+  const { data, error } = useGames();
   const [isLoading, setIsLoading] = useState(true);
   const skeletons = [1, 2, 3, 4, 5, 6];
 
   useEffect(() => {
-    if (games.length > 0) {
+    if (data.length > 0) {
       setIsLoading(false);
     }
-  }, [games]);
+  }, [data]);
 
   if (error) return <Text>{error}</Text>;
 
@@ -33,7 +33,7 @@ const GameGrid = () => {
             <GameCardSkeleton />
           </GameCardContainer>
         ))}
-          {games.map((game) => (
+          {data.map((game) => (
           <GameCardContainer key={game.id}>
           <GameCard game={game} />
         </GameCardContainer>
