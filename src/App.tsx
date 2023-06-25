@@ -40,9 +40,13 @@ return (
         </GridItem>
       </Show>
       <GridItem area="main" >
-        <HStack spacing={5} paddingLeft={2} marginBottom={2}>
+        <Flex paddingLeft={2} marginBottom={2}>
+          <Box marginRight={5}>
           <PlatformSelector selectedPlatform={gameQuery.platform} onSelectPlatform={(platform) => setGameQuery({ ...gameQuery, platform}) } />
-<SortSelector sortOrder={gameQuery.sortOrder} onSelectSortOrder={(sortOrder) => setGameQuery({ ...gameQuery, sortOrder })} />        </HStack>
+</Box>
+
+<SortSelector sortOrder={gameQuery.sortOrder} onSelectSortOrder={(sortOrder) => setGameQuery({ ...gameQuery, sortOrder })} /> 
+       </Flex>
         <GameGrid gameQuery={gameQuery}/>
       </GridItem>
     </Grid>
