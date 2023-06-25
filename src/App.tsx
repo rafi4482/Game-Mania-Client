@@ -6,6 +6,8 @@ import NavBar from "./components/NavBar";
 import { Platform } from "./hooks/useGames";
 import { Genre } from "./hooks/useGenres";
 import PlatformIconList from "./components/PlatformIconList";
+import PlatformSelector from "./components/PlatformSelector";
+
 
 
 
@@ -33,6 +35,7 @@ return (
         </GridItem>
       </Show>
       <GridItem area="main" >
+        <PlatformSelector></PlatformSelector>
         <GameGrid selectedGenre={selectedGenre}/>
       </GridItem>
     </Grid>
