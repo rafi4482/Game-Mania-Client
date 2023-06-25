@@ -32,7 +32,23 @@ if(error) return null;
        borderRadius={8}
       src={getCroppedImageUrl(genre.image_background)}
        />
-       <Button fontWeight={genre.id===selectedGenre?.id ? 'bold' : 'normal'}  onClick={()=>onSelectGenre(genre)} fontSize='lg' variant='link'>{genre.name}</Button>
+<Button
+  fontWeight={genre.id === selectedGenre?.id ? 'bold' : 'normal'}
+  onClick={() => onSelectGenre(genre)}
+  fontSize='lg'
+  variant='link'
+  transition="color 0.3s ease, transform 0.3s ease"
+  _hover={{
+    color: 'white',
+    transform: 'scale(1.1)',
+  }}
+  _focus={{
+    boxShadow: 'none',
+  }}
+  color={genre.id === selectedGenre?.id ? 'orange' : 'white'}
+>
+  {genre.name}
+</Button>
               </HStack>
         </ListItem>)}
         
