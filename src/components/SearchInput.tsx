@@ -15,7 +15,8 @@ interface Props {
       if (ref.current) onSearch(ref.current.value);
     }}>
       <InputGroup>
-        <InputLeftElement children={<BsSearch />} />
+        <InputLeftElement   style={{ cursor: 'pointer' }}
+ children={<BsSearch />} />
         <Input ref={ref} borderRadius={20} placeholder="Search games..." variant="filled" />
       </InputGroup>
     </form>
